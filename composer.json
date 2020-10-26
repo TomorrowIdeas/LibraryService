@@ -1,0 +1,54 @@
+{
+    "name": "tomorrow/base-service",
+    "type": "project",
+    "require": {
+		"php": ">=7.4",
+		"ext-json": "*",
+		"ext-pdo": "*",
+		"ext-pgsql": "*",
+		"ext-mbstring": "*",
+        "nimbly/limber": "^1.2",
+        "nimbly/capsule": "^1.0",
+        "airbrake/phpbrake": "^0.7.3",
+        "nimbly/carton": "^1.1",
+        "vlucas/phpdotenv": "^5.2",
+        "nimbly/caboodle": "^0.3.1",
+        "react/http": "^1.1",
+        "robmorgan/phinx": "^0.12.4",
+		"nimbly/shuttle": "^0.4.0",
+		"illuminate/database": "^8.9",
+        "monolog/monolog": "^2.1",
+        "league/openapi-psr7-validator": "^0.12.1",
+        "psy/psysh": "^0.10.4",
+        "peppeocchi/php-cron-scheduler": "^3.0",
+        "nimbly/syndicate": "^0.8.0",
+        "aws/aws-sdk-php": "^3.158",
+        "predis/predis": "^1.1",
+        "nimbly/remodel": "^1.2"
+    },
+    "require-dev": {
+		"ext-sqlite3": "*",
+        "phpunit/phpunit": "^9.3",
+        "php-coveralls/php-coveralls": "^2.3",
+        "vimeo/psalm": "^3.16",
+        "symfony/var-dumper": "^5.1",
+        "fzaninotto/faker": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": ["app\/functions.php"]
+    },
+    "authors": [
+        {
+            "name": "Donovan Jones",
+            "email": "donovan@tomorrow.me"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.4.3"
+        }
+    }
+}

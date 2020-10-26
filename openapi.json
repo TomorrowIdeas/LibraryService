@@ -1,0 +1,48 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Base Service API",
+		"description": "This is the base service to build new services off of.",
+		"contact": {
+			"name": "Backend Dev Team"
+		},
+		"version": "1"
+	},
+
+	"servers": [
+		{
+			"url": "http://service-name.tomorrow.prod.priv",
+			"description": "Production service URL"
+		},
+		{
+			"url": "http://service-name.staging.tomorrow.me",
+			"description": "Staging service URL"
+		},
+		{
+			"url": "http://service-name.integration.tomorrow.me",
+			"description": "Integration service URL"
+		}
+	],
+
+	"paths": {
+		"/heartbeat": {
+			"get": {
+				"operationId": "CheckHeartbeat",
+				"summary": "Check the service heartbeat.",
+				"description": "Check the service heartbeat.",
+				"responses": {
+					"200": {
+						"description": "Service is up and running",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type" : "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
