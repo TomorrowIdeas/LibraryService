@@ -70,3 +70,13 @@ rm database/database.sqlite3
 ```
 
 Don't forget to run migrations again and seed your database.
+
+## Running tests
+```bash
+make test
+```
+
+## Running static analysis
+```bash
+make analyze
+```
