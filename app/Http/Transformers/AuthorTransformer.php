@@ -13,8 +13,9 @@ class AuthorTransformer extends Transformer
 		return [
 			"id" => $author->id,
 			"name" => $author->name,
-			"created_at" => $author->created_at,
-			"updated_at" => $author->updated_at
+			"website_url" => $author->website_url,
+			"created_at" => $author->created_at->format("c"),
+			"updated_at" => $author->updated_at->format("c")
 		];
 	}
 

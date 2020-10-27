@@ -19,22 +19,15 @@ class RequestLoggerMiddleware implements MiddlewareInterface
 	 */
 	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 	{
-		/**
-		 * !!!!!!!
-		 *
-		 * Do not remove this - we should NEVER be logging request and response data in production.
-		 */
-		if( \is_env("production") ) {
+		if( \config("app.debug") && \config("app.logging") ) {
 			return $handler->handle($request);
 		}
-		/**
-		 * !!!!!!!
-		 */
 
 		// Build a unique request ID to associate matching request and responses
 		$requestId = \bin2hex(\random_bytes(4));
 
-		$endpoint = "{$request->getMethod()}#{$request->getUri()->getPath()}";
+		$endpoint = "{$request->getMethod()}#/{$request->getUri()->getPath()}";
+
 		if( ($queryString = $request->getUri()->getQuery()) ){
 			$endpoint.="?{$queryString}";
 		}

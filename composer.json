@@ -1,5 +1,5 @@
 {
-    "name": "tomorrow/base-service",
+    "name": "tomorrow/library-service",
     "type": "project",
     "require": {
 		"php": ">=7.4",
@@ -39,7 +39,12 @@
             "App\\": "app/"
         },
         "files": ["app\/functions.php"]
-    },
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	},
     "authors": [
         {
             "name": "Donovan Jones",

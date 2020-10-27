@@ -26,6 +26,9 @@
     </coverage>
     <php>
         <env name="ENV" value="test"/>
+		<env name="DEBUG" value="false"/>
+		<env name="REPORTING" value="false"/>
+		<env name="LOGGING" value="false"/>
         <env name="DB_DRIVER" value="sqlite"/>
         <env name="DB_HOST" value=""/>
         <env name="DB_DATABASE" value=":memory:"/>

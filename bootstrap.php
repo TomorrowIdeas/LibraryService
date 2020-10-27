@@ -10,7 +10,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 \defined("APP_ROOT") or \define("APP_ROOT", __DIR__);
 
 if( \file_exists(APP_ROOT . "/.env") ) {
-	Dotenv::createUnsafeImmutable(APP_ROOT)->safeLoad();
+	Dotenv::createUnsafeMutable(APP_ROOT)->safeLoad();
 }
 
 $container = Container::getInstance();

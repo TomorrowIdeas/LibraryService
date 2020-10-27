@@ -33,3 +33,7 @@ $manager->migrate("test");
 
 // Replace migration manager with this instance instead.
 $container->set(MigrationManager::class, $manager);
+
+$container->register(
+	\config("http.providers")
+);
