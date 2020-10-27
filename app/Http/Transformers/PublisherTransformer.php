@@ -13,8 +13,8 @@ class PublisherTransformer extends Transformer
 		return [
 			"id" => $publisher->id,
 			"name" => $publisher->name,
-			"created_at" => $publisher->created_at,
-			"updated_at" => $publisher->updated_at
+			"created_at" => $publisher->created_at->format("c"),
+			"updated_at" => $publisher->updated_at->format("c")
 		];
 	}
 

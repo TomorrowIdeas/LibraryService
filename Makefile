@@ -5,7 +5,7 @@ run:
 	php app/Http/main.php
 
 analyze:
-	vendor/bin/psalm --show-info=true
+	vendor/bin/psalm --show-info=false
 
 test:
 	vendor/bin/phpunit
