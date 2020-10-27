@@ -19,7 +19,7 @@ class RequestLoggerMiddleware implements MiddlewareInterface
 	 */
 	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 	{
-		if( \config("app.debug") && \config("app.logging") ) {
+		if( !\config("app.debug") && !\config("app.logging") ) {
 			return $handler->handle($request);
 		}
 

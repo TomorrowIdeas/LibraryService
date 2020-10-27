@@ -3,7 +3,6 @@
 
 namespace App\Providers;
 
-use App\Core\Log;
 use Carton\Container;
 use Carton\ServiceProviderInterface;
 use Illuminate\Database\Capsule\Manager;
