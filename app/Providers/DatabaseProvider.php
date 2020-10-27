@@ -15,8 +15,6 @@ class DatabaseProvider implements ServiceProviderInterface
     {
 		$manager = new Manager;
 
-		Log::debug("Registering databases");
-
         foreach( \config("database.connections") as $name => $connection ){
             $manager->addConnection($connection, $name);
         }
