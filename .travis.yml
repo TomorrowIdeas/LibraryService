@@ -1,23 +1,7 @@
 language: php
 
-addons:
-  apt:
-    packages:
-        - awscli
-        - python3-pip
-        - python3-setuptools
 php:
   - 7.4
-
-cache:
-  pip: true
-  apt: true
-
-services:
-  - docker
-
-before_install:
-  - export PATH=$PATH:$HOME/.local/bin
 
 jobs:
   include:
@@ -27,48 +11,3 @@ jobs:
     script:
       - make test
       - make analyze
-    after_success:
-      - travis_retry php vendor/bin/php-coveralls -v
-
-  - stage: Build
-    if: tag is present
-    install:
-      - pip3 install awscli
-    script:
-      - echo ${TRAVIS_TAG} > VERSION
-      - echo ${TRAVIS_COMMIT} > REVISION
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 010330100399.dkr.ecr.us-west-2.amazonaws.com
-      - docker build -t ${CLUSTER_NAME}-${SERVICE_NAME}:latest .
-      - docker tag ${CLUSTER_NAME}-${SERVICE_NAME}:latest ${IMAGE_HOST}/${CLUSTER_NAME}-${SERVICE_NAME}:${TRAVIS_TAG}
-      - docker push ${IMAGE_HOST}/${CLUSTER_NAME}-${SERVICE_NAME}:${TRAVIS_TAG}
-    env:
-      - SERVICE_NAME=api
-
-  - stage: Deploy
-    if: tag is present
-    install:
-      - pip3 install awscli
-      - pip3 install ecs-deploy
-    script:
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 010330100399.dkr.ecr.us-west-2.amazonaws.com
-      - ecs deploy ${CLUSTER_NAME} ${SERVICE_NAME} --timeout 600 -i ${CLUSTER_NAME}-${SERVICE_NAME}
-        ${IMAGE_HOST}/${CLUSTER_NAME}-${SERVICE_NAME}:${TRAVIS_TAG} --region us-west-2
-    env:
-      - SERVICE_NAME=api
-
-  - stage: Deploy
-    if: branch IN (integration, staging) AND type != pull_request
-    script:
-      - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
-      - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-      - aws configure set default.region us-west-2
-      - aws deploy create-deployment --application-name ${APPLICATION_NAME} --deployment-config-name
-        CodeDeployDefault.OneAtATime --deployment-group-name ${TRAVIS_BRANCH} --description="${TRAVIS_BRANCH}
-        automated deploy" --github-location repository=TomorrowIdeas/${APPLICATION_NAME},commitId=${TRAVIS_COMMIT}
-notifications:
-  slack: tomorrowideas:njzK3HlxDC1ewyTKWJzdQSMx
-env:
-  global:
-    - IMAGE_HOST=010330100399.dkr.ecr.us-west-2.amazonaws.com
-    - CLUSTER_NAME=base-service
-    - APPLICATION_NAME=base-service
